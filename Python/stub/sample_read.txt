@@ -1,0 +1,3 @@
+Python is an easy and popular programming language.
+It uses clean text that looks like simple English.
+People use it for web sites, data work, and tasks
