@@ -4,27 +4,23 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-"""  EXAMPLE URL's
-"https://www.youtube.com/watch?v=pVkDZueTBpY&list=RDMMpVkDZueTBpY&start_radio=1"
-"https://en.wikipedia.org/wiki/Orange"
-"""
-
-@app.get('/home')
-def hello():
-    return 'THis is my first app'
-
 company_dict ={
         "TCS":['Aravind', 'Anand'],
         "Infosys":['Sugumar', 'Vinoth']
     }
 
-
-# ------------------------------ POST ---------------------------------
 class CompayVlidator(BaseModel):
     company: str
     name: str
 
-@app.post('/create-data')
+@app.get('/company')
+def user_details(company):
+    res = {
+        'user_details':company_dict[company]
+    }
+    return JSONResponse(content=res, status_code=200)
+
+@app.post('/company')
 def company_details(request: CompayVlidator): # Create new company
     company = request.company
     name = request.name
@@ -35,7 +31,7 @@ def company_details(request: CompayVlidator): # Create new company
         company_dict[company] = [name]
         return JSONResponse(content=company_dict, status_code=202)
 
-@app.patch('/edot-data')
+@app.patch('/company')
 def update_details(request: CompayVlidator):
     company = request.company
     name = request.name
@@ -47,7 +43,7 @@ def update_details(request: CompayVlidator):
     else:
         return JSONResponse(content = {'error':f'{company} is not in database'})
 
-@app.put('/update-data')
+@app.put('/company')
 def edit_details(request: CompayVlidator):
     company = request.company
     name = request.name
