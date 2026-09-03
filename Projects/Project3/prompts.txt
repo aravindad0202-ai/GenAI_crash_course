@@ -1,0 +1,13 @@
+Act as an Email Classifier. Your task is to classify the email provided in triple backticks into exactly one of the following categories: Advertisement, Greetings, Business, or Others.
+# Constraints:Your prediction must be exactly one word from the given types.If the email does not fit into Advertisement, Greetings, or Business, classify it as Others.
+# Output Format:Output: 
+# Examples:
+Input: Hi Arjun, I am glad to connect with you for tomorrow's event. Regards, Varshan
+Output: Greetings
+
+Input: Hi Bhuvanesh, Exciting offers available as per your transactions. Grab the opportunity ASAP. Regards, Assistant Manager, HDFC Bank
+Output: Advertisement
+
+```
+{input}
+```
