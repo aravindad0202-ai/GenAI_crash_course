@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 app = FastAPI()
 
@@ -54,3 +54,26 @@ def edit_details(request: CompayVlidator):
     
     else:
         return JSONResponse(content = {'error':f'{company} is not in database'})
+
+
+# ------------------------------------------------------- SERIALIZER EXPLAINATION ------------------------------------------------------
+"""COde given below is only to understand the concept of how serialization work
+There is no relationship between this concept and the above project
+"""
+
+class RequestValidator(BaseModel):
+    banckaount : int
+    name: str
+    amount: int = Field(gt=0, le=10000)
+
+class ResponseValidator(BaseModel):
+    status: str
+    amount: int
+
+@app.post('/learning')
+def learn_serializer(request: RequestValidator):
+    print("working")
+    res_obj = ResponseValidator(status = "Good", amount=request.amount)
+    return JSONResponse(content=res_obj, status_code=200)
+    # brokne_res = {'status':'good',"amount":request.amount}
+    # return brokne_res
