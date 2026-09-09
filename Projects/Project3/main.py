@@ -14,7 +14,7 @@ def prompt_generator(email: str) -> str:
         prompt: str = data.read()
 
     final_prompt = prompt.format(input=email)
-
+    
     return final_prompt
 
 @app.post("/email-classifier")
